@@ -79,7 +79,7 @@ class Spider_Job(object):
         try:
 
             # 超时时间
-            socket.timeout = 10
+            socket.timeout = 7
             thd_request = requests.get(self.url_list[url_nums],
                                        params=self.__params,
                                        headers={'User-Agent':random.choice(agents)})
@@ -275,9 +275,9 @@ class Spider_Job(object):
         # 等待线程结束
         for thd_end in thd_list:
 
-            thd_end.join(timeout=3.5)
+            thd_end.join(timeout=8)
 
-        print('\n{}-{}数据爬取完成\n'.format(self.__thd_area,self.__thd_jobs))
+        print('\n{}-{}数据爬取完成，正在处理数据...\n'.format(self.__thd_area,self.__thd_jobs))
 
 
 # 创建进程处理进行大分类爬取
@@ -372,9 +372,9 @@ class Pro_Spider(object):
         # 等待进程结束
         for pro_end in pro_lists:
 
-            pro_end.join(timeout=10)
+            pro_end.join(timeout=int(self.__pro_total_num * 0.6)+1)
 
-        print('\n数据爬取完成,正在从缓存中提取数据...\n')
+        print('\n数据处理完成,正在从缓存中提取数据...\n')
 
         # 从进程池中取出数据
         pro_main_list = []
@@ -416,7 +416,7 @@ class Pro_Spider(object):
 if __name__ == '__main__':
 
     # 职位地区
-    area_list = ['深圳','北京','广东','杭州','郑州','上海']
+    area_list = ['深圳','北京','广东','杭州','郑州','上海', '长沙', '天津']
 
     # 职位名称
     jobs = 'python'
