@@ -1,0 +1,5 @@
+lxml==3.5.0
+pandas==0.22.0
+redis==2.10.6
+requests==2.18.4
+
